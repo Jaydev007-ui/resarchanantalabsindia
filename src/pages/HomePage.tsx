@@ -87,10 +87,10 @@ export const HomePage: React.FC = () => {
           </p>
 
           {/* Action Buttons */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto w-full">
             <Link
               to="/research/projects"
-              className="px-7 py-3.5 bg-gradient-to-r from-sky-600 via-blue-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white font-semibold rounded-xl text-sm shadow-md shadow-sky-600/20 transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
+              className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-sky-600 via-blue-600 to-blue-700 hover:from-sky-500 hover:to-blue-600 text-white font-semibold rounded-xl text-sm shadow-md shadow-sky-600/20 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
             >
               <span>Explore Research</span>
               <ArrowRight className="w-4 h-4" />
@@ -98,7 +98,7 @@ export const HomePage: React.FC = () => {
 
             <Link
               to="/research/tools"
-              className="px-7 py-3.5 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-700 font-semibold rounded-xl text-sm shadow-xs transition-all flex items-center gap-2"
+              className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 border border-slate-300 hover:border-slate-400 text-slate-700 font-semibold rounded-xl text-sm shadow-xs transition-all flex items-center justify-center gap-2"
             >
               <Wrench className="w-4 h-4 text-emerald-600" />
               <span>Explore Engineering Tools</span>

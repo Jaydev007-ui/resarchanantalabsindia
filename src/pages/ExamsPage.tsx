@@ -387,8 +387,8 @@ export const ExamsPage: React.FC = () => {
 
       {/* Registration Modal Popup */}
       {isRegisterModalOpen && selectedTopic && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto">
             <div className="flex items-start justify-between">
               <div>
                 <span className="px-2.5 py-1 bg-sky-100 text-sky-800 text-[11px] font-mono font-semibold rounded-lg">
@@ -499,42 +499,72 @@ export const ExamsPage: React.FC = () => {
       {phase === 'exam' && selectedTopic && questions.length > 0 && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
           {/* Sticky Header Bar */}
-          <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-md flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
+          <div className="sticky top-16 sm:top-20 z-30 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-3 sm:p-4 shadow-md flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
               <img
                 src="/ananta-logo.jpg"
                 alt="Ananta Labs Logo"
-                className="w-10 h-10 rounded-xl object-contain border border-slate-200 shadow-sm"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl object-contain border border-slate-200 shadow-sm shrink-0"
               />
-              <div>
-                <span className="text-[11px] font-mono text-sky-700 font-bold block uppercase tracking-wider">
+              <div className="min-w-0">
+                <span className="text-[10px] sm:text-[11px] font-mono text-sky-700 font-bold block uppercase tracking-wider truncate">
                   {selectedTopic}
                 </span>
-                <span className="text-xs font-bold text-slate-900">
-                  Candidate: {candidateForm.fullName}
+                <span className="text-xs font-bold text-slate-900 truncate block">
+                  {candidateForm.fullName}
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 shrink-0">
               {/* Countdown Timer */}
-              <div className={`flex items-center gap-2 px-4 py-2 rounded-xl font-mono font-bold text-sm border ${
+              <div className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl font-mono font-bold text-xs sm:text-sm border ${
                 timeLeft < 300 
                   ? 'bg-rose-50 text-rose-600 border-rose-300 animate-pulse' 
                   : timeLeft < 900
                   ? 'bg-amber-50 text-amber-700 border-amber-300'
                   : 'bg-slate-100 text-slate-800 border-slate-200'
               }`}>
-                <Clock className="w-4 h-4" />
+                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>{formatTime(timeLeft)}</span>
               </div>
 
               <button
                 onClick={handleManualSubmit}
-                className="px-5 py-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-emerald-600/20"
+                className="px-3 sm:px-5 py-1.5 sm:py-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-emerald-600/20 whitespace-nowrap"
               >
-                Submit Exam
+                Submit
               </button>
+            </div>
+          </div>
+
+          {/* Mobile & Tablet Quick Jump Question Palette Strip */}
+          <div className="lg:hidden p-3 bg-white border border-slate-200 rounded-2xl shadow-xs space-y-2">
+            <div className="flex items-center justify-between text-xs font-mono text-slate-500">
+              <span className="font-semibold text-slate-700">Quick Jump:</span>
+              <span className="text-[11px] text-sky-700">{Object.keys(answers).length}/40 Answered</span>
+            </div>
+            <div className="overflow-x-auto scrollbar-none flex items-center gap-1.5 py-1">
+              {questions.map((_, idx) => {
+                const isAnswered = answers[idx] !== undefined;
+                const isFlagged = flagged[idx];
+                const isCurrent = currentIndex === idx;
+
+                let bgClass = 'bg-slate-100 text-slate-700 border-slate-200';
+                if (isCurrent) bgClass = 'ring-2 ring-sky-500 bg-sky-100 font-bold text-sky-900 border-sky-400';
+                else if (isAnswered) bgClass = 'bg-emerald-600 text-white border-emerald-600';
+                else if (isFlagged) bgClass = 'bg-amber-500 text-white border-amber-500';
+
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`min-w-8 h-8 rounded-lg text-xs font-mono font-bold flex items-center justify-center border transition shrink-0 ${bgClass}`}
+                  >
+                    {idx + 1}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -716,22 +746,20 @@ export const ExamsPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="inline-flex items-center gap-6 px-6 py-3 bg-white/80 backdrop-blur rounded-2xl border border-slate-200 font-mono text-sm">
-              <div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 p-4 sm:px-6 sm:py-3 bg-white/80 backdrop-blur rounded-2xl border border-slate-200 font-mono text-xs sm:text-sm max-w-xl mx-auto divide-y sm:divide-y-0 sm:divide-x divide-slate-200 text-center">
+              <div className="py-1 sm:py-0">
                 <span className="text-[10px] text-slate-400 block uppercase">Correct Answers</span>
-                <span className="text-xl font-bold text-slate-900">{score} / 40</span>
+                <span className="text-lg sm:text-xl font-bold text-slate-900">{score} / 40</span>
               </div>
-              <div className="h-8 w-px bg-slate-200" />
-              <div>
+              <div className="py-1 sm:py-0">
                 <span className="text-[10px] text-slate-400 block uppercase">Percentage</span>
-                <span className={`text-xl font-bold ${passed ? 'text-emerald-700' : 'text-rose-700'}`}>
+                <span className={`text-lg sm:text-xl font-bold ${passed ? 'text-emerald-700' : 'text-rose-700'}`}>
                   {percentage}%
                 </span>
               </div>
-              <div className="h-8 w-px bg-slate-200" />
-              <div>
+              <div className="py-1 sm:py-0">
                 <span className="text-[10px] text-slate-400 block uppercase">Qualifying Cutoff</span>
-                <span className="text-xl font-bold text-slate-700">60% (24 Qs)</span>
+                <span className="text-lg sm:text-xl font-bold text-slate-700">60% (24 Qs)</span>
               </div>
             </div>
 
@@ -763,7 +791,7 @@ export const ExamsPage: React.FC = () => {
 
           {/* Certificate Component (Visible & Print-ready) */}
           {passed && (
-            <div id="printable-certificate" className="bg-white border-8 border-double border-slate-300 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-center space-y-8 font-sans">
+            <div id="printable-certificate" className="bg-white border-4 sm:border-8 border-double border-slate-300 rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden text-center space-y-6 sm:space-y-8 font-sans overflow-x-auto">
               {/* Watermark Logo */}
               <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
                 <img src="/ananta-logo.jpg" alt="Watermark" className="w-[500px] h-[500px] object-contain" />

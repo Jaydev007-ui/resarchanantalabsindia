@@ -191,8 +191,8 @@ export const UnifySecurityEngine: React.FC = () => {
     <>
       {/* 1. High-Tech Security Interception Modal Alert */}
       {alertState.isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md animate-fadeIn">
-          <div className="bg-white border-2 border-rose-500/80 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-[0_0_50px_rgba(244,63,94,0.35)] relative overflow-hidden space-y-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-fadeIn">
+          <div className="bg-white border-2 border-rose-500/80 rounded-3xl max-w-xl w-full p-5 sm:p-8 shadow-[0_0_50px_rgba(244,63,94,0.35)] relative overflow-hidden space-y-6 max-h-[92vh] overflow-y-auto">
             {/* Ambient Security Glow */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-500 via-amber-500 to-rose-600 animate-pulse" />
 
@@ -310,8 +310,8 @@ export const UnifyDiagnosticsModal: React.FC<{ isOpen: boolean; onClose: () => v
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white border border-slate-200 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-white border border-slate-200 rounded-3xl max-w-xl w-full p-5 sm:p-8 shadow-2xl space-y-6 max-h-[92vh] overflow-y-auto">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 p-1 flex items-center justify-center shadow-sm overflow-hidden shrink-0">

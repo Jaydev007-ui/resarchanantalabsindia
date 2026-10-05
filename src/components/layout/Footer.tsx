@@ -141,8 +141,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLeadModal }) => {
         </div>
 
         {/* UNIFY Security Engine Official Brand Banner */}
-        <div className="mt-12 p-6 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl border border-slate-800 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
-          <div className="flex items-center gap-4">
+        <div className="mt-12 p-5 sm:p-6 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl border border-slate-800 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-md">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
             <div className="w-16 h-16 rounded-2xl bg-white p-1 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
               <img
                 src="/unify-engine-logo.jpg"

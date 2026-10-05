@@ -54,7 +54,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
       <div 
-        className="relative w-full max-w-xl bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-2xl text-slate-800"
+        className="relative w-full max-w-xl bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-2xl text-slate-800 max-h-[92vh] overflow-y-auto"
         role="dialog"
         aria-modal="true"
       >

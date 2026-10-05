@@ -62,6 +62,14 @@ export const InteractiveCanvas: React.FC = () => {
       mouseY = e.clientY - rect.top;
     };
 
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.touches[0].clientX - rect.left;
+        mouseY = e.touches[0].clientY - rect.top;
+      }
+    };
+
     const onMouseLeave = () => {
       mouseX = -1000;
       mouseY = -1000;
@@ -69,6 +77,8 @@ export const InteractiveCanvas: React.FC = () => {
 
     canvas.parentElement?.addEventListener('mousemove', onMouseMove);
     canvas.parentElement?.addEventListener('mouseleave', onMouseLeave);
+    canvas.parentElement?.addEventListener('touchmove', onTouchMove, { passive: true });
+    canvas.parentElement?.addEventListener('touchend', onMouseLeave, { passive: true });
 
     let time = 0;
 
@@ -164,6 +174,8 @@ export const InteractiveCanvas: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       canvas.parentElement?.removeEventListener('mousemove', onMouseMove);
       canvas.parentElement?.removeEventListener('mouseleave', onMouseLeave);
+      canvas.parentElement?.removeEventListener('touchmove', onTouchMove);
+      canvas.parentElement?.removeEventListener('touchend', onMouseLeave);
     };
   }, []);
 
